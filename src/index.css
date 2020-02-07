@@ -4,3 +4,196 @@ body {
   font-size: 16px;
   font-family: 'Press Start 2P', cursive;
 }
+
+#game {
+  display: block;
+}
+
+#strip {
+  display: flex;
+  color: #A5C942;
+  background-color: #A5C942;
+  align-items: center;
+  justify-content: center;
+}
+
+#controls {
+  display: flex;
+  background-color: #111203;
+}
+
+#controls div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6D9D30;
+  border-left: 1px solid #A5C942;
+}
+
+#controls div:hover {
+  cursor: pointer;
+  background-color: #252908;
+  color: #A5C942;
+}
+
+#game-menu, #game-story, #game-controls, #game-options, #game-about, #game-over {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  text-align: center;
+}
+
+#game-menu {
+  z-index: 2;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 25, 0, 0.5), #252908), radial-gradient(#252908, #697E1E);
+  background-position: 0 0, 0 -50vh;
+  color: #A5C942;
+}
+
+#game-menu h1 {
+  text-decoration: underline;
+  letter-spacing: -2px;
+}
+
+#game-menu h1, #game-menu h2, .option {
+  color: #909F9C;
+}
+
+#menu-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#menu-list li {
+  padding: 10px;
+}
+
+#menu-list li span {
+  font-size: 1.5em;
+}
+
+#menu-list li:hover {
+  color: #6D9D30;
+  cursor: pointer;
+  text-shadow: -1px -1px #A5C942;
+}
+
+#game-story {
+  display: none;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 25, 0.5), #000118), radial-gradient(#000118, #020AAF);
+  background-position: 0px 0px, 0px -50vh;
+  color: #DF9100;
+  font-size: 1.2em;
+  z-index: 3;
+}
+
+#game-controls {
+  display: none;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(25, 25, 25, 0.5), #525152), radial-gradient(#525152, #BC6A02);
+  background-position: 0px 0px, 0px -50vh;
+  color: #DF9100;
+  font-size: 1.2em;
+  z-index: 4;
+}
+
+#game-options {
+  display: none;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(25, 25, 25, 0.5), #740C07), radial-gradient(#740C07, #BC6A02);
+  background-position: 0px 0px, 0px -50vh;
+  color: #020773;
+  font-size: 1.2em;
+  z-index: 5;
+}
+
+#tilting-input, #sounding-input, .volume-radio, #tilting-input-min, #sounding-input-min {
+  display: none;
+}
+
+#tilting-label:hover, #sounding-label:hover, .volume-label, #tilting-label-min:hover, #sounding-label-min:hover, #opt {
+  cursor: pointer;
+}
+
+#tilting-label:before, #sounding-label:before, .volume-label:before, #tilting-label-min:before, #sounding-label-min:before {
+  display: inline-block;
+  background-color: #740C07;
+  content: "-";
+  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.volume-label:before {
+  border-radius: 50%;
+}
+
+#tilting-input:checked ~ #tilting-label:before, #sounding-input:checked ~ #sounding-label:before, #tilting-input-min:checked ~ #tilting-label-min:before, #sounding-input-min:checked ~ #sounding-label-min:before {
+  background-color: #006100;
+  content: "+";
+}
+
+.volume-radio:checked + .volume-label:before {
+  background-color: #006100;
+  content: "+";
+}
+
+#game-about {
+  display: none;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(25, 25, 25, 0.5), #525152), radial-gradient(#525152, #AFAFAF);
+  background-position: 0px 0px, 0px -50vh;
+  color: #A5C942;
+  font-size: 1.2em;
+  z-index: 6;
+}
+
+#game-over {
+  display: none;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(25, 25, 25, 0.5), #D13056), radial-gradient(#D13056, #FE8CA7);
+  background-position: 0px 0px, 0px -50vh;
+  color: #111203;
+  font-size: 1.2em;
+  z-index: 7;
+}
+
+.btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2em;
+  background-image: linear-gradient(#BC6A02, #C2A50D);
+  background-position: 0px -15px;
+  color: #740C07;
+  border: 1px solid #909F9C;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  color: #121138;
+  border: 1px solid #C7D7C8;
+  background-image: linear-gradient(#C2A50D, #BC6A02);
+}
+
+.line-under {
+  background-image: radial-gradient(#252908 5%, rgba(37, 41, 8, 0.5) 15%, rgba(0, 0, 0, 0) 40%);
+}
+
+#game-options-min {
+  background-color: #252908;
+  color: #A5C942;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+#options-min-menu, #close {
+  display: none;
+  color: #A2BF90;
+}
+
+.text-min {
+  font-size: 0.8em;
+}
