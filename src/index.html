@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ARKAN||ID</title>
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -14,9 +14,121 @@
       <circle cx="32" cy="16" r="16" fill="red" />
       <circle cx="46" cy="40" r="16" fill="green" />
       <circle cx="18" cy="40" r="16" fill="blue" />
-      <circle cx="32" cy="32" r="20" fill="white" />
+      <circle cx="32" cy="32" r="28" fill="white" />
     </svg>
     <span class="text-centered">Loading...</span>
+  </div>
+
+  <canvas id="game"></canvas>
+  
+  <div id="strip">---</div>
+  
+  <div id="controls">
+    <div id="left">◄</div>
+    <div id="fire">▲</div>
+    <div id="right">►</div>
+  </div>
+
+  <div id="game-menu">
+    <h1>ARKAN||ID</h1>
+    <h2>game</h2>
+    <ul id="menu-list">
+      <li class="line-under"><span id="play-btn">►PLAY</span></li>
+      <li class="line-under"><span id="controls-btn">CONTROLS</span></li>
+      <li class="line-under"><span id="options-btn">OPTIONS</span></li>
+      <li class="line-under"><span id="about-btn">ABOUT</span></li>
+    </ul>
+  </div>
+
+  <div id="game-story">
+    <span><br><br>
+      THE ERA AND TIME OF<br>
+      THIS STORY IS UNKNOWN.<br>
+      <br>
+      AFTER THE NOSTALGIA FOR<br>
+      RETRO-GAMES AROSE,<br>
+      AMAZING APP "SOLOLEARN"<br>
+      WAS OPENED, AND "OLEGOSH"<br>
+      BEGAN TO CODE THIS GAME.<br>
+      <br>
+      NOT JUST FOR SELF-STUDY,<br>
+      BUT ALSO TO ALLOW SOMEONE<br>
+      TO LEARN AND PLAY TOO....
+    </span><br><br>
+    <div class="line-under"><button id="start-btn" class="btn">KUDOS</button></div>
+  </div>
+
+  <div id="game-controls">
+    <span><br><br>
+      You can move the platform to the left by pressing ◄ button below || by pushing ◄ button on your keyboard || by tilting your device in this ◄ way (you must first enable it in the options).<br><br>
+      Also you can move the platform to the right by pressing ► button below || by pushing ► button on your keyboard || by tilting your device in this ► way (you must first enable it in the options).<br><br>
+      You can even cast the ball || shoot the laser by pressing ▲ button below || by pushing ▲ button on your keyboard.
+    </span><br><br>
+    <div class="line-under"><button class="back-btn btn">◄BACK</button></div>
+  </div>
+
+  <div id="game-options"><br>
+    <div class="line-under"><button class="back-btn btn" id="sound-check">◄BACK</button></div>
+    <span class="line-under"><br>
+      Tilt settings:
+    </span><br><br>
+    <form id="options-form">
+      <input type="checkbox" id="tilting-input" name="tilting" value="false">
+      <label for="tilting-input" id="tilting-label" class="option">Enable tilting the device?</label>
+      <br>(FYI: While it is on, you cannot use ◄ or ► buttons)
+      <span class="line-under"><br><br>
+        Sound settings:
+      </span><br><br>
+      <input type="checkbox" id="sounding-input" name="sounding" value="false">
+      <label for="sounding-input" id="sounding-label" class="option">Enable the game sounds?</label>
+      <span class="line-under"><br><br>
+        Volume settings:
+      </span><br><br>
+      <input type="radio" name="volume" data-value="0.2" id="volume-02" class="volume-radio">
+      <label for="volume-02" class="volume-label option">volume: ■■□□□□□□□□ (0.2)</label><br>
+      <input type="radio" name="volume" data-value="0.5" id="volume-05" class="volume-radio" checked>
+      <label for="volume-05" class="volume-label option">volume: ■■■■■□□□□□ (0.5)</label><br>
+      <input type="radio" name="volume" data-value="0.7" id="volume-07" class="volume-radio">
+      <label for="volume-07" class="volume-label option">volume: ■■■■■■■□□□ (0.7)</label><br>
+      <input type="radio" name="volume" data-value="1.0" id="volume-10" class="volume-radio">
+      <label for="volume-10" class="volume-label option">volume: ■■■■■■■■■■ (1.0)</label>
+    </form><br><br>
+  </div>
+
+  <div id="game-about">
+    <span><br><br>
+      Author:<br>
+      Game created by OlegOsh 2020<br>
+      Original game:<br>
+      Arkanoid by Taito 1986<br>
+      Sounds source:<br>
+      Bfxr sound program<br>
+      <a href="https://www.bfxr.net/">
+        https://www.bfxr.net/
+      </a><br>
+      SoloLearn app:<br>
+      <a href="https://www.sololearn.com/">
+        https://www.sololearn.com/
+      </a>
+    </span><br><br>
+    <div class="line-under"><button class="back-btn btn">◄BACK</button></div>
+  </div>
+
+  <div id="game-over">
+    <span class="line-under"><br><br>
+      GAME OVER
+    </span><br><br>
+    <div class="line-under"><button class="btn" id="restart" onclick="reinit();">◄MENU</button></div>
+  </div>
+
+  <div id="game-options-min">
+    <span id="opt">☼<span id="close">close</span></span>
+    <div id="options-min-menu">
+      <input type="checkbox" id="tilting-input-min" name="tilting-min" value="false">
+      <label for="tilting-input-min" id="tilting-label-min">↔</label><br>
+      <input type="checkbox" id="sounding-input-min" name="sounding-min" value="false">
+      <label for="sounding-input-min" id="sounding-label-min">♫</label>
+    </div>
   </div>
 
 </body>
