@@ -1,6 +1,6 @@
-import { dtr } from "./utils";
-import { createColors } from "./colors";
-import { createMaps } from "./maps";
+import { dtr } from './utils';
+import { createColors } from './colors';
+import { createMaps } from './maps';
 
 export const options = {
   assignConsts() {
