@@ -75,6 +75,99 @@ export function calcProbability(threshold) {
   return false;
 }
 
+export function down(e) {
+  if (e) {
+    e.preventDefault();
+  }
+  if (options.tilting) {
+    if (e.keyCode && e.keyCode === 38) {
+      options.keys.fire = true;
+      return;
+    }
+  }
+  if (e.keyCode && !options.tilting) {
+    switch (e.keyCode) {
+      case 37: options.keys.left = true; break;
+      case 38: options.keys.fire = true; break;
+      case 39: options.keys.right = true; break;
+    }
+    return;
+  }
+  if (options.tilting) {
+    if (e.target.id === 'fire') {
+      options.keys.fire = true;
+      e.target.style.backgroundColor = options.colors[3];
+    }
+  }
+  if (!options.tilting) {
+    switch (e.target.id) {
+      case 'left': options.keys.left = true; break;
+      case 'fire': options.keys.fire = true; break;
+      case 'right': options.keys.right = true; break;
+    }
+    e.target.style.backgroundColor = options.colors[3];
+  }
+}
+
+function addLaser(code, id) {
+  if ((code === 38 || id === 'fire') && options.player.armed) {
+    if (random(0, 1)) {
+      options.lasers.push(new Laser(
+        options.player.x + options.player.w / 4 - options.W10 / 2,
+        options.player.y - options.W10
+      ));
+      if (options.sounding) {
+        options.sounds.laserShoot.play();
+      }
+    } else {
+      options.lasers.push(new Laser(
+        options.player.x + options.player.w - options.player.w / 4 - options.W10 / 2,
+        options.player.y - options.W10));
+      if (options.sounding) {
+        options.sounds.laserShoot.play();
+      }
+    }
+  }
+}
+
+export function up(e) {
+  if (e) {
+    e.preventDefault();
+  }
+  if (options.tilting) {
+    if (e.keyCode && e.keyCode === 38) {
+      options.keys.fire = false;
+      addLaser(e.keyCode, false);
+      return;
+    }
+  }
+  if (e.keyCode && !options.tilting) {
+    switch (e.keyCode) {
+      case 37: options.keys.left = false; break;
+      case 38: options.keys.fire = false; break;
+      case 39: options.keys.right = false; break;
+    }
+    addLaser(e.keyCode, false);
+    return;
+  }
+  if (options.tilting) {
+    if (e.target.id === 'fire') {
+      options.keys.fire = false;
+      e.target.style.backgroundColor = '';
+      addLaser(false, e.target.id);
+    }
+  }
+  if (!options.tilting) {
+    switch (e.target.id) {
+      case 'left': options.keys.left = false; break;
+      case 'fire': options.keys.fire = false; break;
+      case 'right': options.keys.right = false; break;
+    }
+    e.target.style.backgroundColor = '';
+    addLaser(false, e.target.id);
+  }
+}
+
 export function dtr(a) {
   return a * Math.PI / 180;
 }
