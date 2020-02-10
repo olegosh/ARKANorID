@@ -13,18 +13,18 @@ export const options = {
     this.CH = Math.floor(window.innerHeight / 4);
     this.cols = 13;
     this.width = this.canvas.width = window.innerWidth;
-    this.height = this.canvas.height = window.innerHeight - CH;
+    this.height = this.canvas.height = window.innerHeight - this.CH;
 
     this.context = canvas.getContext('2d');
 
     this.W = this.height > this.width ? Math.floor(this.width / 16) : Math.floor(this.height / 16);
-    this.H = Math.floor(W / 2);
-    this.W2 = H;
-    this.W5 = Math.floor(W / 5);
-    this.W10 = Math.floor(W / 10);
-    this.H2 = Math.floor(H / 2);
-    this.SW = W * cols;
-    this.SH = height - W;
+    this.H = Math.floor(this.W / 2);
+    this.W2 = this.H;
+    this.W5 = Math.floor(this.W / 5);
+    this.W10 = Math.floor(this.W / 10);
+    this.H2 = Math.floor(this.H / 2);
+    this.SW = this.W * this.cols;
+    this.SH = this.height - this.W;
 
     this.keys = {};
     this.sounds = {};
@@ -36,9 +36,9 @@ export const options = {
     this.portals = [];
 
     this.platformSpeed = 4;
-    this.ballSpeed = platformSpeed;
+    this.ballSpeed = this.platformSpeed;
     this.capsuleSpeed = 3;
-    this.laserSpeed = capsuleSpeed;
+    this.laserSpeed = this.capsuleSpeed;
     
     this.limit = 1E2;
     this.factor = 1E3;
@@ -47,7 +47,7 @@ export const options = {
     this.anglesSin = [];
     this.anglesCos = [];
 
-    for (let a = 0, i = 0; a < 360; a += angleInc, i += 1) {
+    for (let a = 0, i = 0; a < 360; a += this.angleInc, i += 1) {
       this.anglesSin[i] = Math.sin(dtr(a));
       this.anglesCos[i] = Math.cos(dtr(a));
     }
@@ -71,7 +71,7 @@ export const options = {
     this.tiltingInput = document.querySelector('#tilting-input');
     this.soundingInput = document.querySelector('#sounding-input');
     this.form = document.querySelector('#options-form');
-    this.vols = form.elements.volume;
+    this.vols = this.form.elements.volume;
     this.playBtn = document.getElementById('play-btn');
     this.controlsBtn = document.getElementById('controls-btn');
     this.optionsBtn = document.getElementById('options-btn');
