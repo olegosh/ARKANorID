@@ -56,6 +56,55 @@ options.startBtn.addEventListener('click', function() {
   playBtnSnd();
 }, false);
 
+window.addEventListener('devicemotion', function(e) {
+  if (!e.accelerationIncludingGravity || !options.tilting) return;
+  let accel = e.accelerationIncludingGravity;
+  let xa = accel.x;
+  if (xa > 1) {
+    options.keys['left'] = true;
+  } else if (xa < -1) {
+    options.keys['right'] = true;
+  } else {
+    options.keys['left'] = false;
+    options.keys['right'] = false;
+  }
+}, false);
 
+options.opt.addEventListener('click', function() {
+  playBtnSnd();
+  if(options.optM.clientHeight) {
+    options.optM.style.display = 'none';
+    options.close.style.display = 'none';
+  } else {
+    options.optM.style.display = 'block';
+    options.close.style.display = 'inline';
+  }
+}, false);
 
+options.tiltingMin.addEventListener('change', function() {
+  playBtnSnd();
+  options.tilting = !options.tilting;
+  options.tiltingInput.checked = !options.tiltingInput.checked;
+}, false);
 
+options.soundingMin.addEventListener('change', function() {
+  playBtnSnd();
+  options.sounding = !options.sounding;
+  options.soundingInput.checked = !options.soundingInput.checked;
+  checkSounds();
+}, false);
+
+options.soundCheck.addEventListener('click', function() {
+  if(options.sounding) {
+    options.sounds.menuBtn.play();
+  }
+}, false);
+
+options.soundCheck.addEventListener('click', checkSounds, false);
+
+options.restart.addEventListener('click', reinit, false);
+
+window.addEventListener('dblclick', function(e) { e.preventDefault(); }, false);
+window.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);
+window.addEventListener('selectstart', function(e) { e.preventDefault(); }, false);
+window.addEventListener('dragstart', function(e) { e.preventDefault(); }, false);
