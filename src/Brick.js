@@ -19,8 +19,8 @@ export function Brick(x, y, type) {
 }
 
 Brick.prototype.defCP = function(t) {
-  var c = '#000000';
-  var p = 0;
+  let c = '#000000';
+  let p = 0;
   switch (t) {
     case 'g': c = colors[14]; p = 9; break;
     case 'r': c = colors[15]; p = random(1, 8); break;
@@ -47,8 +47,8 @@ Brick.prototype.draw = function() {
   drawFR(this.x, this.y, W, H, this.c);
   drawFR(this.x, this.y, W, H2, colors[34]);
   if (this.lives > 1 && this.lives < 6) {
-    for(var q = 0; q < this.lives; q += 1) {
-      drawFR(this.x + W10 + W5 * q, this.y + H2, W10, H2 / 2, colors[15]);
+    for (let i = 0; i < this.lives; i += 1) {
+      drawFR(this.x + W10 + W5 * i, this.y + H2, W10, H2 / 2, colors[15]);
     }
   }
   if (this.lives > 1) {

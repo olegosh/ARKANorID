@@ -20,7 +20,7 @@ export function Capsule(x, y, t) {
 }
 
 Capsule.prototype.defC = function(t) {
-  var c = '#FFFFFF';
+  let c = '#FFFFFF';
   switch (t) {
     case 'E': c = colors[7]; break; //(E —— "expand")
     //- increases the platform by 2 times
@@ -49,7 +49,7 @@ Capsule.prototype.draw = function() {
 
 Capsule.prototype.move = function() {
   this.ny = this.y + this.s;
-  if(sidesColl(
+  if (sidesColl(
       this.nx,
       this.ny,
       this.nx + W,
