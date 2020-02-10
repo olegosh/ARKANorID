@@ -26,6 +26,32 @@ export function setVol() {
   playBtnSnd();
 }
 
+export function checkSounds() {
+  if(options.sounding) {
+    options.sounds.ballFlyaway.play();
+    options.sounds.brickDamaged.play();
+    options.sounds.brickDestroyed.play();
+    options.sounds.capsuleBreakthrough.play();
+    options.sounds.capsuleCatch.play();
+    options.sounds.capsuleDivide.play();
+    options.sounds.capsuleExpand.play();
+    options.sounds.capsuleLaser.play();
+    options.sounds.capsulePlayer.play();
+    options.sounds.capsuleSlow.play();
+    options.sounds.laserShoot.play();
+    options.sounds.menu.play();
+    options.sounds.menuBtn.play();
+    options.sounds.newLvl.play();
+    options.sounds.portal.play();
+  }
+}
+
+export function playBtnSnd() {
+  if(options.sounding) {
+    options.sounds.menuBtn.play();
+  }
+}
+
 export function showAndHide(show, hide) {
   if (show) {
     show.style.display = 'block';
