@@ -1,11 +1,7 @@
 import { options } from './options';
 import { addEventListeners } from './listeners';
 
-export function init() {
-  options.assignLets();
-  options.assignConsts();
-  addEventListeners();
-
+function createObjects() {
   // options.player = new Platform(
   //   options.SW / 2,
   //   options.SH - options.H
@@ -34,6 +30,14 @@ export function init() {
   //     }
   //   }
   // }
+}
+
+export function init() {
+  options.assignLets();
+  options.assignConsts();
+  addEventListeners();
+
+  createObjects();
 
   // createSounds();
   // createBgImages();
@@ -41,5 +45,19 @@ export function init() {
   // startGame();
 
   options.loading.style.display = 'none';
+}
 
+export function reinit() {
+  playBtnSnd();
+  showAndHide(gameMenu, gameOver);
+
+  options.points = 0;
+  options.score = 0;
+  options.lives = 3;
+  options.currentLvl = 0;
+  options.level = currentLvl + 1;
+  options.bricks.length = 0;
+  options.currentBg = 0;
+
+  createObjects();
 }
