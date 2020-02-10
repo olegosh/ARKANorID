@@ -1,12 +1,19 @@
 import { options } from './options';
+import { random } from './utils';
 
 const colors = options.colors;
+const SW = options.SW;
+const SH = options.SH;
 const W = options.W;
 const W2 = options.W2;
 const W10 = options.W10;
 const H = options.H;
 const H2 = options.H2;
 const player = options.player;
+const sounding = options.sounding;
+const sounds = options.sounds;
+const portals = options.portals;
+const balls = options.balls;
 
 export function Capsule(x, y, t) {
   this.x = x;
@@ -71,3 +78,88 @@ Capsule.prototype.move = function() {
   }
   this.y = this.ny;
 };
+
+function changeState(state) {
+  if (state === 'expand') {
+    if (sounding) {
+      sounds.capsuleExpand.play();
+    }
+    changeState('normal');
+    if (player.expandable) {
+      if (player.x <= SW / 2) {
+        player.setW(W * 4);
+        player.expandable = false;
+      } else {
+        player.setX(player.x - W * 2);
+        player.setW(W * 4);
+        player.expandable = false;
+      }
+    }
+  } else if (state === 'divide') {
+    if (sounding) {
+      sounds.capsuleDivide.play();
+    }
+    changeState('normal');
+    let x = balls[balls.length - 1].x;
+    let y = balls[balls.length - 1].y;
+    let a = balls[balls.length - 1].a;
+    let add = true;
+    for (let i = balls.length - 1; i >= 0; i -= 1) {
+      if (balls[i].y > player.y + H || balls[i].sticky) {
+        add = false;
+        points += factor;
+      }
+    }
+    if (add) {
+      balls.push(new Ball(x, y, false));
+      balls.push(new Ball(x, y, false));
+    }
+    if (balls[balls.length - 1]) balls[balls.length - 1].a = a + 0.2;
+    if (balls[balls.length - 2]) balls[balls.length - 2].a = a - 0.2;
+  } else if (state === 'laser') {
+    if (sounding) {
+      sounds.capsuleLaser.play();
+    }
+    changeState('normal');
+    player.armed = true;
+  } else if (state === 'slow') {
+    if (sounding) {
+      sounds.capsuleSlow.play();
+    }
+    changeState('normal');
+    for (let i = balls.length - 1; i >= 0; i -= 1) {
+      balls[i].setSpeed(options.ballSpeed / 2);
+    }
+    player.setSpeed(platformSpeed / 2);
+  } else if (state === 'breakthrough') {
+    if (sounding) {
+      sounds.capsuleBreakthrough.play();
+    }
+    changeState('normal');
+    if (!portals.length) {
+      if (random(0, 1)) {
+        portals.push(new Portal(SW + W, SH - H * 2));
+      } else {
+        portals.push(new Portal(H, SH - H * 2));
+      }
+    }
+  } else if (state === 'catch') {
+    if (sounding) {
+      sounds.capsuleCatch.play();
+    }
+    changeState('normal');
+    for (let i = balls.length - 1; i >= 0; i -= 1) {
+      balls[i].stickable = true;
+    }
+  } else if (state === 'normal') {
+    for (let i = balls.length - 1; i >= 0; i -= 1) {
+      if (balls[i]) balls[i].setSpeed(options.ballSpeed);
+      if (balls[i]) balls[i].stickable = false;
+      if (balls[i]) balls[i].sticky = false;
+    }
+    player.setSpeed(platformSpeed);
+    player.armed = false;
+    player.setW(W * 2);
+    player.expandable = true;
+  }
+}
