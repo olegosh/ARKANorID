@@ -1,4 +1,5 @@
 import { options } from './options';
+import { sidesColl } from './collisions';
 
 export function Platform(x, y) {
   this.x = x;

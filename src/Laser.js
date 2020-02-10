@@ -1,4 +1,5 @@
 import { options } from './options';
+import { rectColl } from './collisions';
 
 const colors = options.colors;
 const W = options.W;
