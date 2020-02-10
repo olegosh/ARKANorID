@@ -1,9 +1,11 @@
+import { options } from './options';
+
 export function addLoader() {
   document.addEventListener('DOMContentLoaded', function() {
-    if(!loading) {
+    if(!options.loading) {
       document.querySelector('#loading').style.display = 'block';
     } else {
-      loading.style.display = 'block';
+      options.loading.style.display = 'block';
     }
   }, false);
 }
