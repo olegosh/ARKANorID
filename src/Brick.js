@@ -1,5 +1,6 @@
 import { options } from './options';
 import { random } from './utils';
+import { drawFR, drawSR } from './draw';
 
 const colors = options.colors;
 const W = options.W;

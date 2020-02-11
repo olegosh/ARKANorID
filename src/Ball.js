@@ -1,6 +1,7 @@
 import { options } from './options';
 import { dtr, rtd } from './utils';
 import { wallColl, rectColl } from './collisions';
+import { drawFC, drawSC } from './draw';
 
 const W = options.W;
 const H = options.H;

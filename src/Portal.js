@@ -1,4 +1,5 @@
 import { options } from './options';
+import { drawFR } from './draw';
 
 export function Portal(x, y) {
   this.x = x;

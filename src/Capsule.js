@@ -1,6 +1,7 @@
 import { options } from './options';
 import { random } from './utils';
 import { sidesColl } from './collisions';
+import { drawFR, drawFT } from './draw';
 
 const colors = options.colors;
 const SW = options.SW;

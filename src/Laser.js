@@ -1,5 +1,6 @@
 import { options } from './options';
 import { rectColl } from './collisions';
+import { drawFR } from './draw';
 
 const colors = options.colors;
 const W = options.W;

@@ -1,4 +1,5 @@
 import { options } from './options';
+import { clear, drawBackground, switchLvlBg, drawBorder, drawInfo } from './draw';
 
 export function levels() {
   clear();

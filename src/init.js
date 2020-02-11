@@ -1,5 +1,8 @@
 import { options } from './options';
 import { addEventListeners } from './listeners';
+import { createSounds } from './utils';
+import { createBgImages } from './draw';
+import { setGame, levels, startGame } from './source';
 
 function createObjects() {
   // options.player = new Platform(
@@ -39,9 +42,9 @@ export function init() {
 
   createObjects();
 
-  // createSounds();
-  // createBgImages();
-  // setGame(levels);
+  createSounds();
+  createBgImages();
+  setGame(levels);
   // startGame();
 
   options.loading.style.display = 'none';

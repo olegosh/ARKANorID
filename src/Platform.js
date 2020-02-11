@@ -1,5 +1,6 @@
 import { options } from './options';
 import { sidesColl } from './collisions';
+import { drawFR, drawSR } from './draw';
 
 export function Platform(x, y) {
   this.x = x;

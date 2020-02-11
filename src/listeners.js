@@ -1,4 +1,6 @@
 import { options } from './options';
+import { reinit } from './init';
+import { checkSounds, down, up, playBtnSnd, setVol, showAndHide } from './utils';
 
 export function addEventListeners() {
   options.controls.addEventListener('mousedown', down, false);
@@ -26,34 +28,34 @@ export function addEventListeners() {
   }
 
   options.playBtn.addEventListener('click', function() {
-    showAndHide(gameStory, gameMenu);
+    showAndHide(options.gameStory, options.gameMenu);
     playBtnSnd();
   }, false);
 
   options.controlsBtn.addEventListener('click', function() {
-    showAndHide(gameControls, gameMenu);
+    showAndHide(options.gameControls, options.gameMenu);
     playBtnSnd();
   }, false);
 
   options.optionsBtn.addEventListener('click', function() {
-    showAndHide(gameOptions, gameMenu);
+    showAndHide(options.gameOptions, options.gameMenu);
     playBtnSnd();
   }, false);
 
   options.aboutBtn.addEventListener('click', function() {
-    showAndHide(gameAbout, gameMenu);
+    showAndHide(options.gameAbout, options.gameMenu);
     playBtnSnd();
   }, false);
 
   for (let i = 0; i < options.backBtns.length; i += 1) {
     options.backBtns[i].addEventListener('click', function() {
-      showAndHide(gameMenu, [gameControls, gameOptions, gameAbout, gameOver]);
+      showAndHide(options.gameMenu, [options.gameControls, options.gameOptions, options.gameAbout, options.gameOver]);
       playBtnSnd();
     }, false);
   }
 
   options.startBtn.addEventListener('click', function() {
-    showAndHide(null, gameStory);
+    showAndHide(null, options.gameStory);
     playBtnSnd();
   }, false);
 
