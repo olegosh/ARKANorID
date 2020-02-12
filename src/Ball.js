@@ -10,6 +10,9 @@ const SH = options.SH;
 const player = options.player;
 const angleInc = options.angleInc;
 const keys = options.keys;
+const width = options.width;
+const height = options.height;
+const sounding = options.sounding;
 
 export function Ball(x, y, s) {
   this.x = x;
@@ -30,11 +33,14 @@ Ball.prototype.setSpeed = function(speed) {
 };
 
 Ball.prototype.draw = function() {
-  drawSC(this.x, this.y, H / 2 - options.W10, options.colors[0]);
-  drawFC(this.x, this.y, H / 2 - options.W10, options.colors[6]);
+  // console.log(H);
+  // debugger;
+  drawSC(this.x, this.y, options.H / 2 - options.W10, options.colors[0]);
+  drawFC(this.x, this.y, options.H / 2 - options.W10, options.colors[6]);
 };
 
 Ball.prototype.calculateIndex = function(a) {
+  const angleInc = options.angleInc;
   let deg = rtd(a);
   let times = Math.round(deg / angleInc);
   let index = times - 1;
@@ -42,6 +48,13 @@ Ball.prototype.calculateIndex = function(a) {
 };
 
 Ball.prototype.move = function() {
+  const keys = options.keys;
+  const player = options.player;
+  const W = options.W;
+  const H = options.H;
+  const SW = options.SW;
+  const SH = options.SH;
+  const sounding = options.sounding;
   this.a %= Math.PI * 2;
   if (this.a < 0) {
     this.a += Math.PI * 2;
@@ -84,6 +97,8 @@ Ball.prototype.move = function() {
         this.deletable = true;
     }
     let bricks = options.bricks[options.currentLvl];
+    // console.log(bricks);
+    // debugger;
     for (let i = bricks.length - 1; i >= 0; i -= 1) {
       if (rectColl(
           {x: this.nx - H / 2, y: this.ny - H / 2, w: H / 2, h: H / 2},
@@ -127,14 +142,14 @@ Ball.prototype.move = function() {
           this.y -= H;
           this.dy = -this.dy;
           if (keys['right'] && this.dx < 0) {
-            this.a -= dtr(angleInc * 2);
+            this.a -= dtr(options.angleInc * 2);
           } else if (keys['right'] && this.dx > 0) {
-            this.a += dtr(angleInc * 2);
+            this.a += dtr(options.angleInc * 2);
           }
           if (keys['left'] && this.dx > 0) {
-            this.a += dtr(angleInc * 2);
+            this.a += dtr(options.angleInc * 2);
           } else if (keys['left'] && this.dx < 0) {
-            this.a -= dtr(angleInc * 2);
+            this.a -= dtr(options.angleInc * 2);
           }
     }
     if (rectColl(
@@ -146,20 +161,20 @@ Ball.prototype.move = function() {
           this.dy = -this.dy;
           if (keys['right'] && this.dx < 0) {
             this.dx = -this.dx;
-            this.a -= dtr(angleInc);
+            this.a -= dtr(options.angleInc);
           } else if (keys['right'] && this.dx > 0) {
-            this.a += dtr(angleInc);
+            this.a += dtr(options.angleInc);
           }
           if (keys['left'] && this.dx > 0) {
             this.dx = -this.dx;
-            this.a += dtr(angleInc);
+            this.a += dtr(options.angleInc);
           } else if (keys['left'] && this.dx < 0) {
-            this.a -= dtr(angleInc);
+            this.a -= dtr(options.angleInc);
           }
     }
-    let index = this.calculateIndex(this.a);
-    this.nx = this.x + this.dx * this.s * options.anglesCos[index];
-    this.ny = this.y + this.dy * this.s * options.anglesSin[index];
+    let idx = this.calculateIndex(this.a);
+    this.nx = this.x + this.dx * this.s * options.anglesCos[idx];
+    this.ny = this.y + this.dy * this.s * options.anglesSin[idx];
     this.x = this.nx;
     this.y = this.ny;
   }
@@ -184,12 +199,16 @@ Ball.prototype.move = function() {
 };
 
 Ball.prototype.checkE = function() {
+  const width = options.width;
+  const height = options.height;
   if (this.x < 0 || this.y < 0 || this.x > width || this.y > height) {
     this.deletable = true;
   }
 };
 
 Ball.prototype.checkZ = function() {
+  const player = options.player;
+  const H = options.H;
   if (wallColl(
     this.x - H / 4,
     this.y - H / 4,
@@ -204,6 +223,8 @@ Ball.prototype.checkZ = function() {
 };
 
 Ball.prototype.correctA = function() {
+  const H = options.H;
+  const angleInc = options.angleInc;
   if (Math.abs(rtd(this.a)) <= 10 || Math.abs(rtd(this.a)) >= 350 || (Math.abs(rtd(this.a)) > 170 && Math.abs(rtd(this.a)) < 190)) {
     this.a = Math.random(0, 1) ? this.a + dtr(angleInc) : this.a - dtr(angleInc);
     this.y -= H;
@@ -211,6 +232,9 @@ Ball.prototype.correctA = function() {
 };
 
 Ball.prototype.leave = function() {
+  const player = options.player;
+  const H = options.H;
+  const SW = options.SW;
   if (this.y < player.y) {
     return;
   }

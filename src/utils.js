@@ -1,5 +1,11 @@
 import { options } from './options';
 import { soundSrc } from './sounds';
+import { Sound } from './sound';
+import { rectColl } from './collisions';
+// import { drawFR } from './draw';
+// import { addLaser } from './Laser';
+// import { Laser } from './Laser';
+// drawFR
 
 export function createSounds() {
   for (let s in soundSrc) {
@@ -108,6 +114,47 @@ export function down(e) {
     e.target.style.backgroundColor = options.colors[3];
   }
 }
+
+function drawFR(x, y, w, h, c, ctx) {
+  if (ctx) {
+    ctx.save();
+    ctx.fillStyle = c;
+    ctx.fillRect(x, y, w, h);
+    ctx.restore();
+  } else {
+    options.context.save();
+    options.context.fillStyle = c;
+    options.context.fillRect(x, y, w, h);
+    options.context.restore();
+  }
+}
+
+function Laser(x, y) {
+  this.x = x;
+  this.y = y;
+  this.s = options.laserSpeed;
+  this.nx = this.x;
+  this.ny = this.y;
+  this.d = false;
+}
+
+Laser.prototype.draw = function() {
+  drawFR(this.x, this.y, options.W10, options.W5, options.colors[6]);
+};
+
+Laser.prototype.move = function() {
+  this.ny = this.y - this.s;
+  const bricks = options.bricks[options.currentLvl];
+  for (let i = bricks.length - 1; i >= 0; i -= 1) {
+    if (rectColl(
+      {x: this.x, y: this.y, w: options.W10, h: options.W5},
+      {x: bricks[i].x, y: bricks[i].y, w: options.W, h: options.H})) {
+      this.d = true;
+      bricks[i].lives -= 1;
+    }
+  }
+  this.y = this.ny;
+};
 
 function addLaser(code, id) {
   if ((code === 38 || id === 'fire') && options.player.armed) {

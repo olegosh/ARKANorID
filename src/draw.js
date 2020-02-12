@@ -1,5 +1,13 @@
 import { options } from './options';
 
+const width = options.width;
+const height = options.height;
+const SW = options.SW;
+const SH = options.SH;
+const colors = options.colors;
+const W = options.W;
+const H = options.H;
+
 export function drawFR(x, y, w, h, c, ctx) {
   if (ctx) {
     ctx.save();
@@ -71,7 +79,7 @@ export function drawSC(x, y, r, c, ctx) {
 export function drawFT(t, x, y, c, s) {
   options.context.save();
   options.context.fillStyle = c;
-  options.context.font = s + 'px ' + options.font;
+  options.context.font = s + 'px ' + '\'' + options.font + '\'';
   options.context.fillText(t, x, y);
   options.context.restore();
 }
@@ -79,7 +87,7 @@ export function drawFT(t, x, y, c, s) {
 export function drawST(t, x, y, c, s) {
   options.context.save();
   options.context.strokeStyle = c;
-  options.context.font = s + 'px ' + options.font;
+  options.context.font = s + 'px ' + '\'' + options.font + '\'';
   options.context.strokeText(t, x, y);
   options.context.restore();
 }
@@ -114,7 +122,7 @@ export function drawBorder() {
     if (y <= options.W * 4) {
       drawFR(options.W * (options.cols + 1), options.H + y, options.H, options.W, options.colors[2]);
     }
-    if (y >= W * 4 && y < W * 8) {
+    if (y >= options.W * 4 && y < options.W * 8) {
       drawFR(options.W * (options.cols + 1), options.H + y, options.H, options.W, options.colors[3]);
     }
     if (y >= options.W * 8 && y < options.W * (options.cols + 1)) {
@@ -142,7 +150,7 @@ export function drawInfo() {
     options.H
   );
   drawFT(
-    options.options.highPts,
+    options.highPts,
     options.W * (options.cols + 1) + options.H + options.H / 2,
     options.W * 2 + options.H * 3 + options.H,
     options.colors[2],
@@ -150,7 +158,7 @@ export function drawInfo() {
   );
   drawFT(
     'PTS:',
-    options.W * (cols + 1) + options.H + options.H / 2,
+    options.W * (options.cols + 1) + options.H + options.H / 2,
     options.W * 2 + options.H * 4 + options.H * 2,
     options.colors[3],
     options.H
@@ -164,7 +172,7 @@ export function drawInfo() {
   );
   drawFT(
     'HP:',
-    options.W * (cols + 1) + options.H + options.H / 2,
+    options.W * (options.cols + 1) + options.H + options.H / 2,
     options.W * 2 + options.H * 6 + options.H * 4,
     options.colors[4],
     options.H
@@ -178,7 +186,7 @@ export function drawInfo() {
   );
   drawFT(
     'LVL:',
-    options.W * (cols + 1) + H + options.H / 2,
+    options.W * (options.cols + 1) + options.H + options.H / 2,
     options.W * 2 + options.H * 8 + options.H * 6,
     options.colors[5],
     options.H
@@ -192,97 +200,99 @@ export function drawInfo() {
   );
 }
 
-const width = options.width;
-const height = options.height;
-const SW = options.SW;
-const SH = options.SH;
-const colors = options.colors;
-const W = options.W;
-const H = options.H;
-
 export function createBgImages() {
+  const colors = options.colors;
   let canvas = document.createElement('canvas');
-  canvas.width = SW;
-  canvas.height = SH;
-  let context = canvas.getContext('2d');
-  drawFR(0, 0, width, height, colors[24], context);
+  let width = canvas.width = options.SW;
+  let height = canvas.height = options.SH;
+  let ctx = canvas.getContext('2d');
+  const W = options.W;
+  const H = options.H;
+  // console.log(W);/////////
+  // debugger;
+  drawFR(0, 0, width, height, colors[24], ctx);
   for (let y = 0; y <= height; y += W) {
     for (let x = 0; x <= width; x += W) {
       if (x % 2 === 0) {
-        drawFR(x, y, W, H, colors[24], context);
-        drawFR(x, y + H, W, H, colors[25], context);
-        drawFR(x + H / 2, y + H / 2, W, H, colors[25], context);
-        drawFR(x + H / 2, y + H + H / 2, W, H, colors[24], context);
+        drawFR(x, y, W, H, colors[24], ctx);
+        drawFR(x, y + H, W, H, colors[25], ctx);
+        drawFR(x + H / 2, y + H / 2, W, H, colors[25], ctx);
+        drawFR(x + H / 2, y + H + H / 2, W, H, colors[24], ctx);
       } else {
-        drawFR(x, y, W, H, colors[25], context);
-        drawFR(x, y + H, W, H, colors[24], context);
-        drawFR(x + H / 2, y + H / 2, W, H, colors[24], context);
-        drawFR(x + H / 2, y + H + H / 2, W, H, colors[25], context);
+        drawFR(x, y, W, H, colors[25], ctx);
+        drawFR(x, y + H, W, H, colors[24], ctx);
+        drawFR(x + H / 2, y + H / 2, W, H, colors[24], ctx);
+        drawFR(x + H / 2, y + H + H / 2, W, H, colors[25], ctx);
       }
     }
   }
-  drawFR(0, 0, width, height, colors[34], context);
+  drawFR(0, 0, width, height, colors[34], ctx);
   options.bg0 = document.createElement('img');
   options.bg0.width = width;
   options.bg0.height = height;
   options.bg0.src = canvas.toDataURL('image/jpeg', 1.0);
-  context.clearRect(0, 0, width, height);
+  // console.dir(options.bg0);
+  // debugger;
+  ctx.clearRect(0, 0, width, height);
   for (let y = 0; y <= height; y += W * 2) {
     for (let x = 0; x <= width; x += W) {
-      drawFR(x, y, W, W * 2, colors[26], context);
-      drawFR(x + W / 2 - H / 4, y + W - H + H / 2, H / 2, H / 4, colors[27], context);
-      drawFC(x + W / 2, y + W / 2, H / 2, colors[27], context);
-      drawFC(x + W / 2, y, H, colors[27], context);
-      drawFC(x + W / 2 - W / 5, y + H / 3, H / 4, colors[26], context);
-      drawFC(x + W / 2 + W / 5, y + H / 3, H / 4, colors[26], context);
+      drawFR(x, y, W, W * 2, colors[26], ctx);
+      drawFR(x + W / 2 - H / 4, y + W - H + H / 2, H / 2, H / 4, colors[27], ctx);
+      drawFC(x + W / 2, y + W / 2, H / 2, colors[27], ctx);
+      drawFC(x + W / 2, y, H, colors[27], ctx);
+      drawFC(x + W / 2 - W / 5, y + H / 3, H / 4, colors[26], ctx);
+      drawFC(x + W / 2 + W / 5, y + H / 3, H / 4, colors[26], ctx);
     }
   }
-  drawFR(0, 0, width, height, colors[34], context);
+  drawFR(0, 0, width, height, colors[34], ctx);
   options.bg1 = document.createElement('img');
   options.bg1.width = width;
   options.bg1.height = height;
   options.bg1.src = canvas.toDataURL('image/jpeg', 1.0);
-  context.clearRect(0, 0, width, height);
+  ctx.clearRect(0, 0, width, height);
   for (let y = 0; y <= height; y += W * 2) {
     for (let x = 0; x <= width; x += W) {
-      drawFR(x, y, W, W * 2, colors[28], context);
-      drawFR(x + W / 5, y + W / 5, W, W, colors[29], context);
-      drawFR(x + W / 4, y + W / 4, W, W, colors[28], context);
-      drawFC(x + W / 2, y + H / 2 - W / 5, H / 2, colors[29], context);
-      drawSC(x + W / 2, y + H / 2 + W / 5, H / 4, colors[29], context);
-      drawFR(x + W - W / 5, y + H / 2, W / 2, W / 2, colors[29], context);
-      drawFR(x + W - W / 2, y + H / 2 + H / 3, W / 2, W / 2, colors[28], context);
-      drawFR(x + H / 3, y + H / 2 + H / 3 - W / 5 + H, W / 2, W / 2, colors[29], context);
-      drawFR(x + H / 3 - H / 5, y + H / 2 + H / 3 - W / 5 - H / 5 + H, W / 2, W / 2, colors[28], context);
+      drawFR(x, y, W, W * 2, colors[28], ctx);
+      drawFR(x + W / 5, y + W / 5, W, W, colors[29], ctx);
+      drawFR(x + W / 4, y + W / 4, W, W, colors[28], ctx);
+      drawFC(x + W / 2, y + H / 2 - W / 5, H / 2, colors[29], ctx);
+      drawSC(x + W / 2, y + H / 2 + W / 5, H / 4, colors[29], ctx);
+      drawFR(x + W - W / 5, y + H / 2, W / 2, W / 2, colors[29], ctx);
+      drawFR(x + W - W / 2, y + H / 2 + H / 3, W / 2, W / 2, colors[28], ctx);
+      drawFR(x + H / 3, y + H / 2 + H / 3 - W / 5 + H, W / 2, W / 2, colors[29], ctx);
+      drawFR(x + H / 3 - H / 5, y + H / 2 + H / 3 - W / 5 - H / 5 + H, W / 2, W / 2, colors[28], ctx);
     }
   }
-  drawFR(0, 0, width, height, colors[34], context);
+  drawFR(0, 0, width, height, colors[34], ctx);
   options.bg2 = document.createElement('img');
   options.bg2.width = width;
   options.bg2.height = height;
   options.bg2.src = canvas.toDataURL('image/jpeg', 1.0);
-  context.clearRect(0, 0, width, height);
+  ctx.clearRect(0, 0, width, height);
   for (let y = 0; y <= height; y += W * 2) {
     for (let x = 0; x <= width; x += W) {
-      drawFR(x, y, W, W * 2, colors[30], context);
-      drawFR(x + W / 2, y + W, H / 2, H, colors[31], context);
-      drawFR(x + W / 4, y + W, H / 3, H / 3, colors[31], context);
-      drawSR(x + W / 2, y + W / 2, H / 2, H, colors[31], context);
-      drawSR(x + W / 3, y + W + H / 3, H, H * 2, colors[31], context);
-      drawFR(x + W / 4, y + W, H / 2, H * 2 - H / 3, colors[31], context);
-      drawFR(x, y + W + W / 2, H / 2, H, colors[31], context);
-      drawFR(x + W / 4, y, H / 3, H / 3, colors[31], context);
+      drawFR(x, y, W, W * 2, colors[30], ctx);
+      drawFR(x + W / 2, y + W, H / 2, H, colors[31], ctx);
+      drawFR(x + W / 4, y + W, H / 3, H / 3, colors[31], ctx);
+      drawSR(x + W / 2, y + W / 2, H / 2, H, colors[31], ctx);
+      drawSR(x + W / 3, y + W + H / 3, H, H * 2, colors[31], ctx);
+      drawFR(x + W / 4, y + W, H / 2, H * 2 - H / 3, colors[31], ctx);
+      drawFR(x, y + W + W / 2, H / 2, H, colors[31], ctx);
+      drawFR(x + W / 4, y, H / 3, H / 3, colors[31], ctx);
     }
   }
-  drawFR(0, 0, width, height, colors[34], context);
+  drawFR(0, 0, width, height, colors[34], ctx);
   options.bg3 = document.createElement('img');
   options.bg3.width = width;
   options.bg3.height = height;
   options.bg3.src = canvas.toDataURL('image/jpeg', 1.0);
-  context.clearRect(0, 0, width, height);
+  ctx.clearRect(0, 0, width, height);
 }
 
 function drawLvlBg(idx) {
+  const SW = options.SW;
+  const SH = options.SH;
+  const W = options.W;
   if (idx === 0) {
     options.context.drawImage(options.bg0, W, W, SW, SH);
   } else if (idx === 1) {

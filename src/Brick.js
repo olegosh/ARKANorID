@@ -22,6 +22,7 @@ export function Brick(x, y, type) {
 Brick.prototype.defCP = function(t) {
   let c = '#000000';
   let p = 0;
+  const colors = options.colors;
   switch (t) {
     case 'g': c = colors[14]; p = 9; break;
     case 'r': c = colors[15]; p = random(1, 8); break;
@@ -45,6 +46,12 @@ Brick.prototype.checkL = function() {
 };
 
 Brick.prototype.draw = function() {
+  const colors = options.colors;
+  const W = options.W;
+  const H = options.H;
+  const H2 = options.H2;
+  const W5 = options.W5;
+  const W10 = options.W10;
   drawFR(this.x, this.y, W, H, this.c);
   drawFR(this.x, this.y, W, H2, colors[34]);
   if (this.lives > 1 && this.lives < 6) {

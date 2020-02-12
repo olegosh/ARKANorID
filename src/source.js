@@ -1,5 +1,8 @@
 import { options } from './options';
 import { clear, drawBackground, switchLvlBg, drawBorder, drawInfo } from './draw';
+import { calcProbability, random, dtr } from './utils';
+import { changeState, Capsule } from './Capsule';
+import { Ball } from './Ball';
 
 export function levels() {
   clear();
@@ -81,7 +84,7 @@ export function levels() {
       }
     }
   }
-  let lastBall = options.balls[options.balls.length - 1];
+  lastBall = options.balls[options.balls.length - 1];
   if (options.auto && options.player && lastBall) {
     options.player.x = lastBall.x - options.player.w / 2;
   }
@@ -158,7 +161,7 @@ function setGameover() {
   options.highScore = options.highScore > options.score ? options.highScore : options.score;
   options.inner = '';
   options.inner += '<span class="line-under"><br><br>GAME OVER</span><br><br>';
-  options.inner += '<div class="line-under"><button class="btn" id="restart" onclick="reinit();">◄MENU</button></div>';
+  options.inner += '<div class="line-under"><button class="btn" id="restart" onclick="__reinit();">◄MENU</button></div>';
   if (receivedLvl === 33 && receivedLives > 0) {
     options.inner += '<span class="line-under"><br>CONGRATULATIONS !!!</span><br>';
     options.inner += '<span class="text-centered text-min">DIMENSION-CONTROLLING FORT "D||H",</span><br>';
@@ -180,7 +183,7 @@ function setGameover() {
   options.inner += '<span class="text-centered">' + options.score + '<br></span><br>';
   options.inner += '<span class="line-under">High score:</span><br>';
   options.inner += '<span class="text-centered">' + options.highScore + '<br></span><br>';
-  options.gameOver.innerHTML = inner;
+  options.gameOver.innerHTML = options.inner;
   options.gameOver.style.display = 'block';
 }
 

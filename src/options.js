@@ -11,14 +11,14 @@ export const options = {
 
     this.CW = Math.floor(window.innerWidth / 3) - 1;
     this.CH = Math.floor(window.innerHeight / 4);
-    
+
     this.width = this.canvas.width = window.innerWidth;
     this.height = this.canvas.height = window.innerHeight - this.CH;
 
     this.cols = 13;
     this.font = 'Press Start 2P';
 
-    this.context = canvas.getContext('2d');
+    this.context = this.canvas.getContext('2d');
 
     this.W = this.height > this.width ? Math.floor(this.width / 16) : Math.floor(this.height / 16);
     this.H = Math.floor(this.W / 2);

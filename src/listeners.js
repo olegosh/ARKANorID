@@ -23,7 +23,7 @@ export function addEventListeners() {
     options.soundingMin.checked = !options.soundingMin.checked;
   }, false);
 
-  for (let i = 0; i < vols.length; i += 1) {
+  for (let i = 0; i < options.vols.length; i += 1) {
     options.vols[i].addEventListener('change', setVol, false);
   }
 

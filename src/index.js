@@ -6,4 +6,4 @@ import { init } from './init';
 
 addLoader();
 
-// window.addEventListener('load', init, false);
+window.addEventListener('load', init, false);

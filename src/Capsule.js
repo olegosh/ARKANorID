@@ -2,6 +2,8 @@ import { options } from './options';
 import { random } from './utils';
 import { sidesColl } from './collisions';
 import { drawFR, drawFT } from './draw';
+import { Ball } from './Ball';
+import { Portal } from './Portal';
 
 const colors = options.colors;
 const SW = options.SW;
@@ -29,6 +31,7 @@ export function Capsule(x, y, t) {
 }
 
 Capsule.prototype.defC = function(t) {
+  const colors = options.colors;
   let c = '#FFFFFF';
   switch (t) {
     case 'E': c = colors[7]; break; //(E —— "expand")
@@ -50,6 +53,12 @@ Capsule.prototype.defC = function(t) {
 };
 
 Capsule.prototype.draw = function() {
+  const W = options.W;
+  const W2 = options.W2;
+  const W10 = options.W10;
+  const H = options.H;
+  const H2 = options.H2;
+  const colors = options.colors;
   drawFR(this.x, this.y, W, H, this.c);
   drawFR(this.x, this.y, W, H2 / 2, colors[34]);
   drawFR(this.x + W10, this.y + H - W10, W - W10, W10, colors[6]);
@@ -57,6 +66,9 @@ Capsule.prototype.draw = function() {
 };
 
 Capsule.prototype.move = function() {
+  const player = options.player;
+  const W = options.W;
+  const H = options.H;
   this.ny = this.y + this.s;
   if (sidesColl(
       this.nx,
@@ -75,13 +87,20 @@ Capsule.prototype.move = function() {
           case 'S': changeState('slow'); break;
           case 'B': changeState('breakthrough'); break;
           case 'C': changeState('catch'); break;
-          case 'P': changeState('normal'); lives += 1; if(sounding) sounds.capsulePlayer.play(); break;
+          case 'P': changeState('normal'); options.lives += 1; if(options.sounding) options.sounds.capsulePlayer.play(); break;
         }
   }
   this.y = this.ny;
 };
 
-function changeState(state) {
+export function changeState(state) {
+  const player = options.player;
+  const balls = options.balls;
+  const portals = options.portals;
+  const W = options.W;
+  const H = options.H;
+  const SW = options.SW;
+  const SH = options.SH;
   if (state === 'expand') {
     if (sounding) {
       sounds.capsuleExpand.play();
@@ -132,7 +151,7 @@ function changeState(state) {
     for (let i = balls.length - 1; i >= 0; i -= 1) {
       balls[i].setSpeed(options.ballSpeed / 2);
     }
-    player.setSpeed(platformSpeed / 2);
+    player.setSpeed(options.platformSpeed / 2);
   } else if (state === 'breakthrough') {
     if (sounding) {
       sounds.capsuleBreakthrough.play();
@@ -159,7 +178,7 @@ function changeState(state) {
       if (balls[i]) balls[i].stickable = false;
       if (balls[i]) balls[i].sticky = false;
     }
-    player.setSpeed(platformSpeed);
+    player.setSpeed(options.platformSpeed);
     player.armed = false;
     player.setW(W * 2);
     player.expandable = true;

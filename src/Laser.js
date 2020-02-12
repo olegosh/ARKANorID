@@ -34,3 +34,24 @@ Laser.prototype.move = function() {
   }
   this.y = this.ny;
 };
+
+export function addLaser(code, id) {
+  if ((code === 38 || id === 'fire') && options.player.armed) {
+    if (random(0, 1)) {
+      options.lasers.push(new Laser(
+        options.player.x + options.player.w / 4 - options.W10 / 2,
+        options.player.y - options.W10
+      ));
+      if (options.sounding) {
+        options.sounds.laserShoot.play();
+      }
+    } else {
+      options.lasers.push(new Laser(
+        options.player.x + options.player.w - options.player.w / 4 - options.W10 / 2,
+        options.player.y - options.W10));
+      if (options.sounding) {
+        options.sounds.laserShoot.play();
+      }
+    }
+  }
+}
