@@ -94,7 +94,10 @@ export function addEventListeners() {
     playBtnSnd();
     options.sounding = !options.sounding;
     options.soundingInput.checked = !options.soundingInput.checked;
-    checkSounds();
+    if(!options.sounding) {
+      checkSounds();
+    }
+    // checkSounds();
   }, false);
 
   options.soundCheck.addEventListener('click', function() {

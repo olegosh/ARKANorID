@@ -28,7 +28,7 @@ Platform.prototype.setW = function(w) {
 
 Platform.prototype.draw = function() {
   if (this.armed) {
-    //drawSR(this.x, this.y, this.w, options.H, options.colors[0]);
+    drawSR(this.x, this.y, this.w, options.H, options.colors[0]);
     drawFR(this.x, this.y, this.w, options.H, options.colors[5]);
     drawFR(this.x, this.y, this.w, options.H2, options.colors[34]);
     drawFR(
@@ -45,20 +45,20 @@ Platform.prototype.draw = function() {
       options.H / 2,
       options.colors[2]
     );
-    //drawSR(
-      //this.x + this.w / 4 - options.W10 / 2,
-      //this.y - options.W10,
-      //options.W10,
-      //options.H + options.W10,
-      //options.colors[2]
-    //);
-    //drawSR(
-      //this.x + this.w - this.w / 4 - options.W10 / 2,
-      //this.y - options.W10,
-      //options.W10,
-      //options.H + options.W10,
-      //options.colors[2]
-    //);
+    drawSR(
+      this.x + this.w / 4 - options.W10 / 2,
+      this.y - options.W10,
+      options.W10,
+      options.H + options.W10,
+      options.colors[2]
+    );
+    drawSR(
+      this.x + this.w - this.w / 4 - options.W10 / 2,
+      this.y - options.W10,
+      options.W10,
+      options.H + options.W10,
+      options.colors[2]
+    );
     drawFR(
       this.x + this.w / 4 - options.W10 / 2,
       this.y - options.W10,
@@ -74,7 +74,7 @@ Platform.prototype.draw = function() {
       options.colors[2]
     );
   } else {
-    //drawSR(this.x, this.y, this.w, options.H, options.colors[0]);
+    drawSR(this.x, this.y, this.w, options.H, options.colors[0]);
     drawFR(this.x, this.y, this.w, options.H, options.colors[5]);
     drawFR(this.x, this.y, this.w, options.H2, options.colors[34]);
   }

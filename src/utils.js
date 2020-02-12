@@ -33,7 +33,7 @@ export function setVol() {
 }
 
 export function checkSounds() {
-  if(options.sounding) {
+  if(!options.sounding) {
     let lastVol = options.volume;
     for (let s in options.sounds) {
       options.sounds[s].setVolume(0.0);
@@ -49,8 +49,8 @@ export function checkSounds() {
     options.sounds.capsulePlayer.play();
     options.sounds.capsuleSlow.play();
     options.sounds.laserShoot.play();
-    options.sounds.menu.play();
-    options.sounds.menuBtn.play();
+    //options.sounds.menu.play();
+    // options.sounds.menuBtn.play();
     options.sounds.newLvl.play();
     options.sounds.portal.play();
     setTimeout(function() {

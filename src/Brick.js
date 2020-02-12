@@ -63,5 +63,5 @@ Brick.prototype.draw = function() {
     drawFR(this.x + W10, this.y + H - W10, W - W10, W10, colors[0]);
     drawFR(this.x + W - W10, this.y + W10, W10, H - W10, colors[0]);
   }
-  //drawSR(this.x, this.y, W, H, colors[0]);
+  drawSR(this.x, this.y, W, H, colors[0]);
 };

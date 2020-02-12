@@ -146,9 +146,13 @@ export function levels() {
     setGameover();
   }
   if (options.sounding && options.gameMenu.clientHeight) {
-    options.sounds.menu.playLoop();
+    setTimeout(function() {
+      options.sounds.menu.playLoop();
+    }, 1E2);
   } else if (options.sounding && !options.gameMenu.clientHeight) {
-    options.sounds.menu.stop();
+    setTimeout(function() {
+      options.sounds.menu.stop();
+    }, 1E3);
   }
 }
 
