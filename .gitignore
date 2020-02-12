@@ -2,6 +2,7 @@
 node_modules/
 public/
 tmp/
+.firebase/
 
 # file
 package-lock.json
