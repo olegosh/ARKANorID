@@ -34,6 +34,10 @@ export function setVol() {
 
 export function checkSounds() {
   if(options.sounding) {
+    let lastVol = options.volume;
+    for (let s in options.sounds) {
+      options.sounds[s].setVolume(0.0);
+    }
     options.sounds.ballFlyaway.play();
     options.sounds.brickDamaged.play();
     options.sounds.brickDestroyed.play();
@@ -49,6 +53,11 @@ export function checkSounds() {
     options.sounds.menuBtn.play();
     options.sounds.newLvl.play();
     options.sounds.portal.play();
+    setTimeout(function() {
+      for (let s in options.sounds) {
+        options.sounds[s].setVolume(lastVol);
+      }
+    }, 1E3, lastVol);
   }
 }
 

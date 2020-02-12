@@ -94,6 +94,8 @@ Capsule.prototype.move = function() {
 };
 
 export function changeState(state) {
+  const sounding = options.sounding;
+  const sounds = options.sounds;
   const player = options.player;
   const balls = options.balls;
   const portals = options.portals;
@@ -128,7 +130,7 @@ export function changeState(state) {
     for (let i = balls.length - 1; i >= 0; i -= 1) {
       if (balls[i].y > player.y + H || balls[i].sticky) {
         add = false;
-        points += factor;
+        options.points += factor;
       }
     }
     if (add) {
