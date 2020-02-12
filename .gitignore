@@ -5,3 +5,5 @@ tmp/
 
 # file
 package-lock.json
+.firebaserc
+firebase.json
