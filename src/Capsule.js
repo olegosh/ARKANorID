@@ -5,20 +5,6 @@ import { drawFR, drawFT } from './draw';
 import { Ball } from './Ball';
 import { Portal } from './Portal';
 
-const colors = options.colors;
-const SW = options.SW;
-const SH = options.SH;
-const W = options.W;
-const W2 = options.W2;
-const W10 = options.W10;
-const H = options.H;
-const H2 = options.H2;
-const player = options.player;
-const sounding = options.sounding;
-const sounds = options.sounds;
-const portals = options.portals;
-const balls = options.balls;
-
 export function Capsule(x, y, t) {
   this.x = x;
   this.y = y;

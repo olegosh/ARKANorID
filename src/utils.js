@@ -2,10 +2,6 @@ import { options } from './options';
 import { soundSrc } from './sounds';
 import { Sound } from './sound';
 import { rectColl } from './collisions';
-// import { drawFR } from './draw';
-// import { addLaser } from './Laser';
-// import { Laser } from './Laser';
-// drawFR
 
 export function createSounds() {
   for (let s in soundSrc) {
@@ -50,7 +46,7 @@ export function checkSounds() {
     options.sounds.capsuleSlow.play();
     options.sounds.laserShoot.play();
     //options.sounds.menu.play();
-    // options.sounds.menuBtn.play();
+    //options.sounds.menuBtn.play();
     options.sounds.newLvl.play();
     options.sounds.portal.play();
     setTimeout(function() {

@@ -2,13 +2,6 @@ import { options } from './options';
 import { random } from './utils';
 import { drawFR, drawSR } from './draw';
 
-const colors = options.colors;
-const W = options.W;
-const H = options.H;
-const H2 = options.H2;
-const W5 = options.W5;
-const W10 = options.W10;
-
 export function Brick(x, y, type) {
   this.x = x;
   this.y = y;

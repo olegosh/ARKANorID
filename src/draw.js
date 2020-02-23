@@ -1,13 +1,5 @@
 import { options } from './options';
 
-const width = options.width;
-const height = options.height;
-const SW = options.SW;
-const SH = options.SH;
-const colors = options.colors;
-const W = options.W;
-const H = options.H;
-
 export function drawFR(x, y, w, h, c, ctx) {
   if (ctx) {
     ctx.save();
@@ -208,8 +200,6 @@ export function createBgImages() {
   let ctx = canvas.getContext('2d');
   const W = options.W;
   const H = options.H;
-  // console.log(W);/////////
-  // debugger;
   drawFR(0, 0, width, height, colors[24], ctx);
   for (let y = 0; y <= height; y += W) {
     for (let x = 0; x <= width; x += W) {
@@ -231,8 +221,6 @@ export function createBgImages() {
   options.bg0.width = width;
   options.bg0.height = height;
   options.bg0.src = canvas.toDataURL('image/jpeg', 1.0);
-  // console.dir(options.bg0);
-  // debugger;
   ctx.clearRect(0, 0, width, height);
   for (let y = 0; y <= height; y += W * 2) {
     for (let x = 0; x <= width; x += W) {

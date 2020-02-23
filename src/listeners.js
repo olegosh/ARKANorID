@@ -97,7 +97,6 @@ export function addEventListeners() {
     if(!options.sounding) {
       checkSounds();
     }
-    // checkSounds();
   }, false);
 
   options.soundCheck.addEventListener('click', function() {

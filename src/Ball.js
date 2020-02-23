@@ -3,17 +3,6 @@ import { dtr, rtd } from './utils';
 import { wallColl, rectColl } from './collisions';
 import { drawFC, drawSC } from './draw';
 
-const W = options.W;
-const H = options.H;
-const SW = options.SW;
-const SH = options.SH;
-const player = options.player;
-const angleInc = options.angleInc;
-const keys = options.keys;
-const width = options.width;
-const height = options.height;
-const sounding = options.sounding;
-
 export function Ball(x, y, s) {
   this.x = x;
   this.y = y;
@@ -33,8 +22,6 @@ Ball.prototype.setSpeed = function(speed) {
 };
 
 Ball.prototype.draw = function() {
-  // console.log(H);
-  // debugger;
   drawSC(this.x, this.y, options.H / 2 - options.W10, options.colors[0]);
   drawFC(this.x, this.y, options.H / 2 - options.W10, options.colors[6]);
 };
@@ -97,8 +84,6 @@ Ball.prototype.move = function() {
         this.deletable = true;
     }
     let bricks = options.bricks[options.currentLvl];
-    // console.log(bricks);
-    // debugger;
     for (let i = bricks.length - 1; i >= 0; i -= 1) {
       if (rectColl(
           {x: this.nx - H / 2, y: this.ny - H / 2, w: H / 2, h: H / 2},
